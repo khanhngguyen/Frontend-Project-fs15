@@ -22,6 +22,9 @@ const RootLayout = () => {
                     <NavLink to='product'>
                         <Button sx={{ color: '#fff' }}>Product</Button>
                     </NavLink>
+                    <NavLink to='cart'>
+                        <Button sx={{ color: '#fff' }}>Cart</Button>
+                    </NavLink>
                     <NavLink to='user'>
                         <Button sx={{ color: '#fff' }}>User</Button>
                     </NavLink>
@@ -31,7 +34,7 @@ const RootLayout = () => {
             </AppBar>
         </Box>
         <Container maxWidth='lg'>
-            <Box sx={{ bgcolor: '#cfe8fc', height: '100vh' }}>
+            <Box sx={{ bgcolor: '#cfe8fc', height: '100%' }}>
                 <Outlet />
             </Box>
         </Container>
