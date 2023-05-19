@@ -15,9 +15,9 @@ const initialState: {
 
 export const fetchProducts = createAsyncThunk(
     'fetchProducts',
-    async (input: number = 0) => {
+    async (offset: number = 0) => {
         try {
-            const response = await axios.get<Product[]>(`https://api.escuelajs.co/api/v1/products?offset=${input}&limit=10`);
+            const response = await axios.get<Product[]>(`https://api.escuelajs.co/api/v1/products?offset=${offset}&limit=10`);
             console.log('fetchProducts run');
             return response.data;
         } catch (e) {

@@ -4,7 +4,7 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 //pages
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
-import Product from './pages/Product'
+import Products from './pages/Products'
 import User from './pages/User'
 import RootLayout from './layouts/RootLayout'
 //hooks
@@ -25,8 +25,8 @@ const router = createBrowserRouter(
         element={<Home />}
       />
       <Route
-        path='product'
-        element={<Product />}
+        path='products'
+        element={<Products />}
       />
       <Route
         path='cart'

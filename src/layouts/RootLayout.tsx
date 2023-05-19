@@ -19,8 +19,8 @@ const RootLayout = () => {
                     <NavLink to='/'>
                         <Button sx={{ color: '#fff' }}>Home</Button>
                     </NavLink>
-                    <NavLink to='product'>
-                        <Button sx={{ color: '#fff' }}>Product</Button>
+                    <NavLink to='products'>
+                        <Button sx={{ color: '#fff' }}>Products</Button>
                     </NavLink>
                     <NavLink to='cart'>
                         <Button sx={{ color: '#fff' }}>Cart</Button>
@@ -47,8 +47,8 @@ const RootLayout = () => {
                     <Link to='/'>
                         <Button sx={{ color: '#fff' }}>Home</Button>
                     </Link>
-                    <Link to='product'>
-                        <Button sx={{ color: '#fff' }}>Product</Button>
+                    <Link to='products'>
+                        <Button sx={{ color: '#fff' }}>Products</Button>
                     </Link>
                     <Link to='user'>
                         <Button sx={{ color: '#fff' }}>User</Button>
