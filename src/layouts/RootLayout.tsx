@@ -26,7 +26,7 @@ const RootLayout = () => {
                         <Button sx={{ color: '#fff' }}>Cart</Button>
                     </NavLink>
                     <NavLink to='user'>
-                        <Button sx={{ color: '#fff' }}>User</Button>
+                        <Button sx={{ color: '#fff' }}>Register/Log in</Button>
                     </NavLink>
                     {/* <NavLink to='product'>Product</NavLink>
                     <NavLink to='user'>User</NavLink> */}

@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { Button, Typography } from '@mui/material';
+import { Button, Grid, Typography, Card } from '@mui/material';
 import { useAppSelector } from '../hooks/useAppSelector'
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { fetchProducts } from '../redux/reducers/productsReducer';
 import useDebounce from '../hooks/useDebounce';
 import { Product } from '../types/Product';
+import ProductsGrid from '../components/ProductsGrid';
 
 const getFilteredList = (products: Product[], search: string) => {
     return products.filter(product => product.title.toLowerCase().includes(search.toLowerCase()))
@@ -52,12 +53,23 @@ const Products = () => {
         <Button>Sort by price</Button>
         {loading && <p>Loading...</p>}
         {error && <p>{error}</p>}
+        <ProductsGrid />
         {/* {products.map(product => (
             <p key={product.id}>{product.title}: {product.description}</p>
         ))} */}
-        {filteredProducts.map(product => (
-            <p key={product.id}>{product.title}: {product.description}</p>
+
+        {/* <Grid container spacing={2}>
+            {filteredProducts.map(product => (
+                <Grid item>
+                    <Card key={product.id}>
+                        {product.title}: {product.description}
+                    </Card>
+                </Grid>
         ))}
+        </Grid> */}
+        {/* {filteredProducts.map(product => (
+            <p key={product.id}>{product.title}: {product.description}</p>
+        ))} */}
         <button onClick={toPrevPage}>Prev</button>
         <button onClick={toNextPage}>Next</button>
     </div>
