@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
-import { Button, Grid, Typography, Card } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import { useAppSelector } from '../hooks/useAppSelector'
-import { useAppDispatch } from '../hooks/useAppDispatch';
-import { fetchProducts } from '../redux/reducers/productsReducer';
 import useDebounce from '../hooks/useDebounce';
 import { Product } from '../types/Product';
 import ProductsGrid from '../components/ProductsGrid';
@@ -12,31 +10,16 @@ const getFilteredList = (products: Product[], search: string) => {
 }
 
 const Products = () => {
-    const [offset, setOffset] = useState(0);
     const [search, setSearch] = useState('');
-    const { products, loading, error } = useAppSelector(state => state.productsReducer);
-    const dispatch = useAppDispatch();
-
-    //functions to next/prev pages
-    const limit = 10;
-    const toNextPage = () => {
-        setOffset(offset => offset + limit);
-        dispatch(fetchProducts(offset + limit));
-    }
-    const toPrevPage = () => {
-        if (offset < limit) return
-        else {
-            setOffset(offset - limit);
-            dispatch(fetchProducts(offset - limit));
-        }
-    }
+    const { products } = useAppSelector(state => state.productsReducer);
 
     //functions to search a product by title
     const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value);
     }
-    const debouncedValue = useDebounce(search, 500);
-    const filteredProducts = getFilteredList(products, debouncedValue);
+    const debouncedSearchInput = useDebounce(search, 500);
+    const filteredProducts = getFilteredList(products, debouncedSearchInput);
+
   return (
     <div>
         <Typography>Product</Typography>
@@ -48,16 +31,14 @@ const Products = () => {
         />
         <button>Search</button>
         <p>Search input: {search}</p>
-        <p>Debounced value: {debouncedValue}</p>
+        <p>Debounced value: {debouncedSearchInput}</p>
         <Button>Sort by categories</Button>
         <Button>Sort by price</Button>
-        {loading && <p>Loading...</p>}
-        {error && <p>{error}</p>}
-        <ProductsGrid />
-        {/* {products.map(product => (
+        {debouncedSearchInput && filteredProducts.map(product => (
             <p key={product.id}>{product.title}: {product.description}</p>
-        ))} */}
-
+        ))}
+        <p>----------------------</p>
+        <ProductsGrid />
         {/* <Grid container spacing={2}>
             {filteredProducts.map(product => (
                 <Grid item>
@@ -67,11 +48,6 @@ const Products = () => {
                 </Grid>
         ))}
         </Grid> */}
-        {/* {filteredProducts.map(product => (
-            <p key={product.id}>{product.title}: {product.description}</p>
-        ))} */}
-        <button onClick={toPrevPage}>Prev</button>
-        <button onClick={toNextPage}>Next</button>
     </div>
   )
 }

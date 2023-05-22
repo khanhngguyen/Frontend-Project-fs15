@@ -10,8 +10,9 @@ import RootLayout from './layouts/RootLayout'
 //hooks
 // import { useAppSelector } from './hooks/useAppSelector'
 import { useAppDispatch } from './hooks/useAppDispatch'
-import { fetchProducts } from './redux/reducers/productsReducer'
+import { fetchAllProducts } from './redux/reducers/productsReducer'
 import Cart from './pages/Cart'
+import ProductDetails from './pages/ProductDetails'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -29,6 +30,10 @@ const router = createBrowserRouter(
         element={<Products />}
       />
       <Route
+        path='products/:id'
+        element={<ProductDetails />}
+      />
+      <Route
         path='cart'
         element={<Cart />}
       />
@@ -44,7 +49,7 @@ const App = () => {
   // console.log(products);
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(fetchProducts());
+    dispatch(fetchAllProducts());
   }, [])
   return (
     <>

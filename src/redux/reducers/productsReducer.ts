@@ -1,24 +1,70 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
-import { Product } from "../../types/Product";
+import { Category, Product } from "../../types/Product";
+import { Condition } from "../../types/Condition";
 
 // const initialState: Product[] = [];
 const initialState: {
     products: Product[],
+    productsWithLimit: Product[],
+    categories: Category[],
     loading: boolean,
     error: string
 } = {
     products: [],
+    productsWithLimit: [],
+    categories: [],
     loading: false,
     error: '',
 }
 
-export const fetchProducts = createAsyncThunk(
-    'fetchProducts',
-    async (offset: number = 0) => {
+export const fetchAllProducts = createAsyncThunk(
+    'fetchAllProducts',
+    async () => {
         try {
-            const response = await axios.get<Product[]>(`https://api.escuelajs.co/api/v1/products?offset=${offset}&limit=10`);
-            console.log('fetchProducts run');
+            const response = await axios.get<Product[]>('https://api.escuelajs.co/api/v1/products');
+            console.log('fetchAllProducts run');
+            return response.data;
+        } catch (e) {
+            const error = e as AxiosError;
+            return error;
+        }
+    }
+)
+
+export const fetchProductsWithConditions = createAsyncThunk(
+    'fetchProductsWithConditions',
+    async ({price_min = 0, price_max = 2000, offset = 0} : Condition) => {
+        try {
+            const response = await axios.get<Product[]>(`https://api.escuelajs.co/api/v1/products/?price_min=${price_min}&price_max=${price_max}&offset=${offset}&limit=10`);
+            console.log('fetchProductsWithConditions run');
+            console.log(`https://api.escuelajs.co/api/v1/products/?price_min=${price_min}&price_max=${price_max}&offset=${offset}&limit=10`);
+            return response.data;
+        } catch (e) {
+            const error = e as AxiosError;
+            return error;
+        }
+    }
+)
+
+export const fetchCategories = createAsyncThunk(
+    'fetchCategories',
+    async () => {
+        try {
+            const response = await axios.get<Category[]>('https://api.escuelajs.co/api/v1/categories');
+            return response.data;
+        } catch (e) {
+            const error = e as AxiosError;
+            return error;
+        }
+    }
+)
+
+export const fetchProductsByCategory = createAsyncThunk(
+    'fetchProductsByCategory',
+    async (category: number) => {
+        try {
+            const response = await axios.get<Product[]>(`https://api.escuelajs.co/api/v1/categories/${category}/products`);
             return response.data;
         } catch (e) {
             const error = e as AxiosError;
@@ -33,7 +79,7 @@ const productsSlice = createSlice({
     reducers: {
     },
     extraReducers: (build) => {
-        build.addCase(fetchProducts.fulfilled, (state, action) => {
+        build.addCase(fetchAllProducts.fulfilled, (state, action) => {
             if (action.payload instanceof AxiosError) {
                 state.error = action.payload.message;
                 state.loading = false;
@@ -42,10 +88,47 @@ const productsSlice = createSlice({
                 state.loading = false;
             }
         })
-        .addCase(fetchProducts.pending, (state, action) => {
+        .addCase(fetchAllProducts.pending, (state, action) => {
             state.loading = true;
         })
-        .addCase(fetchProducts.rejected, (state, action) => {
+        .addCase(fetchAllProducts.rejected, (state, action) => {
+            state.error = 'can not fetch data';
+            state.loading = false;
+        })
+        .addCase(fetchProductsWithConditions.fulfilled, (state, action) => {
+            if (action.payload instanceof AxiosError) {
+                state.productsWithLimit = [];
+            } else {
+                state.productsWithLimit = action.payload;
+            }
+        })
+        .addCase(fetchProductsWithConditions.rejected, () => {
+            console.log('can not fetch data');
+        })
+        .addCase(fetchCategories.fulfilled, (state, action) => {
+            if (action.payload instanceof AxiosError) {
+                state.categories = [];
+            } else {
+                state.categories = action.payload;
+                console.log(state.categories);
+            }
+        })
+        .addCase(fetchCategories.rejected, () => {
+            console.log('can not fetch categories');
+        })
+        .addCase(fetchProductsByCategory.fulfilled, (state, action) => {
+            if (action.payload instanceof AxiosError) {
+                state.error = action.payload.message;
+                state.loading = false;
+            } else {
+                state.productsWithLimit = action.payload;
+                state.loading = false;
+            }
+        })
+        .addCase(fetchProductsByCategory.pending, (state, action) => {
+            state.loading = true;
+        })
+        .addCase(fetchProductsByCategory.rejected, (state, action) => {
             state.error = 'can not fetch data';
             state.loading = false;
         })

@@ -1,4 +1,4 @@
-import { Box, Button, InputLabel, TextField } from '@mui/material';
+import { Box, Button, Grid, InputLabel, Paper, TextField, Typography } from '@mui/material';
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -12,73 +12,104 @@ const User = () => {
   const onSubmit = (data: RegistrationFormData) => {
 
   }
+
+  const paperStyle = { padding: '30px 20px', width: 500, margin: '20px auto' };
+
   return (
-    <Box>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Controller
-          control={control}
-          name='username'
-          render={({ field: { onChange, value }}) => (
-            <>
-            <InputLabel htmlFor='username'>Username:</InputLabel>
-            <TextField
-              placeholder='Username'
-              onChange={onChange}
-            >
-            </TextField>
-            </>
-          )}
-        />
-        {errors.username && (<p>{errors.username.message}</p>)}
-        <Controller
-          control={control}
-          name='email'
-          render={({ field: { onChange, value }}) => (
-            <>
-            <InputLabel htmlFor='email'>Email:</InputLabel>
-            <TextField
-              placeholder='Email'
-              type='email'
-              onChange={onChange}
-            >
-            </TextField>
-            </>
-          )}
-        />
-        <Controller
-          control={control}
-          name='password'
-          render={({ field: { onChange, value }}) => (
-            <>
-            <InputLabel htmlFor='password'>Password:</InputLabel>
-            <TextField
-              placeholder='Password'
-              type='password'
-              onChange={onChange}
-            >
-            </TextField>
-            </>
-          )}
-        />
-        <Controller
-          control={control}
-          name='confirm'
-          render={({ field: { onChange, value }}) => (
-            <>
-            <InputLabel htmlFor='confirm'>Confirm password:</InputLabel>
-            <TextField
-              placeholder='Type in your password again'
-              type='password'
-              onChange={onChange}
-            >
-            </TextField>
-            </>
-          )}
-        />
-        <Button type='submit'>Register</Button>
-      </form>
-      <GoogleLoginButton />
-    </Box>
+    <Grid>
+      <Paper style={paperStyle} elevation={3}>
+        <Grid>
+          <Typography
+            variant='h5'
+            component='h5'
+            textAlign='center'
+          >Sign up</Typography>
+          <Typography
+            margin='5px 0'
+            textAlign='center'
+          >Fill in the form to sign up & create a new account</Typography>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Controller
+              control={control}
+              name='username'
+              render={({ field: { onChange, value }}) => (
+                <>
+                <InputLabel htmlFor='username'>Username:</InputLabel>
+                <TextField
+                  placeholder='Username'
+                  fullWidth
+                  margin='dense'
+                  onChange={onChange}
+                >
+                </TextField>
+                </>
+              )}
+            />
+            {errors.username && (<Typography color='error'>{errors.username.message}</Typography>)}
+            <Controller
+              control={control}
+              name='email'
+              render={({ field: { onChange, value }}) => (
+                <>
+                <InputLabel htmlFor='email'>Email:</InputLabel>
+                <TextField
+                  placeholder='Email'
+                  type='email'
+                  fullWidth
+                  margin='dense'
+                  onChange={onChange}
+                >
+                </TextField>
+                </>
+              )}
+            />
+            <Controller
+              control={control}
+              name='password'
+              render={({ field: { onChange, value }}) => (
+                <>
+                <InputLabel htmlFor='password'>Password:</InputLabel>
+                <TextField
+                  placeholder='Password'
+                  type='password'
+                  fullWidth
+                  margin='dense'
+                  onChange={onChange}
+                >
+                </TextField>
+                </>
+              )}
+            />
+            <Controller
+              control={control}
+              name='confirm'
+              render={({ field: { onChange, value }}) => (
+                <>
+                <InputLabel htmlFor='confirm'>Confirm password:</InputLabel>
+                <TextField
+                  placeholder='Type in your password again'
+                  type='password'
+                  fullWidth
+                  margin='dense'
+                  onChange={onChange}
+                >
+                </TextField>
+                </>
+              )}
+            />
+            <Box textAlign='center' margin='10px auto'>
+              <Button
+                type='submit'
+                variant='contained'
+                color='primary'
+                >Sign up</Button>
+            </Box>
+          </form>
+          <Typography textAlign='center' margin='10px auto'>Or</Typography>
+          <GoogleLoginButton />
+        </Grid>
+      </Paper>
+    </Grid>
   )
 }
 
