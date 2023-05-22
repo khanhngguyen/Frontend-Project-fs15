@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { useAppSelector } from '../hooks/useAppSelector'
 import useDebounce from '../hooks/useDebounce';
 import { Product } from '../types/Product';
@@ -32,8 +32,6 @@ const Products = () => {
         <button>Search</button>
         <p>Search input: {search}</p>
         <p>Debounced value: {debouncedSearchInput}</p>
-        <Button>Sort by categories</Button>
-        <Button>Sort by price</Button>
         {debouncedSearchInput && filteredProducts.map(product => (
             <p key={product.id}>{product.title}: {product.description}</p>
         ))}

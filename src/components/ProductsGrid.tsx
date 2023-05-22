@@ -5,16 +5,17 @@ import { useAppDispatch } from '../hooks/useAppDispatch';
 import { fetchCategories, fetchProductsByCategory, fetchProductsWithConditions } from '../redux/reducers/productsReducer';
 import { InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material';
 import { Condition } from '../types/Condition';
+import { Link } from 'react-router-dom';
 
 const initialCondition: Condition = {
     price_min: 0,
-    price_max: 2000,
+    price_max: 400,
     offset: 0
 }
 const ProductsGrid = () => {
     const [conditions, setConditions] = useState<Condition>(initialCondition);
     const [categoryOptions, setCategoryOptions] = useState(1);
-    const { productsWithLimit, loading, error, categories } = useAppSelector(state => state.productsReducer);
+    const { productsWithConditions, loading, error, categories } = useAppSelector(state => state.productsReducer);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -44,7 +45,7 @@ const ProductsGrid = () => {
     //function to handle sort by categories
     const handleCategoriesChange = (e: SelectChangeEvent<string>) => {
         setCategoryOptions(Number(e.target.value));
-        dispatch(fetchProductsByCategory(categoryOptions));
+        dispatch(fetchProductsByCategory(Number(e.target.value)));
     }
 
     //function to handle filter by prices range
@@ -67,7 +68,7 @@ const ProductsGrid = () => {
                 setConditions({price_min: 1000, price_max: 1500, offset: 0});
                 dispatch(fetchProductsWithConditions({price_min: 1000, price_max: 1500, offset: 0}));
                 break;
-            case '> 1500':
+            case '1500 - 2000':
                 setConditions({price_min: 1500, price_max: 2000, offset: 0});
                 dispatch(fetchProductsWithConditions({price_min: 1500, price_max: 2000, offset: 0}));
                 break;
@@ -94,17 +95,25 @@ const ProductsGrid = () => {
         </Select>
         <InputLabel>Filter by prices range</InputLabel>
         <Select
-            value=''
+            value={`${conditions.price_min} - ${conditions.price_max}`}
             onChange={handlePricesChange}
         >
             <MenuItem value={'0 - 400'}>0 - 400</MenuItem>
             <MenuItem value={'400 - 700'}>400 - 700</MenuItem>
             <MenuItem value={'700 - 1000'}>700 - 1000</MenuItem>
             <MenuItem value={'1000 - 1500'}>1000 - 1500</MenuItem>
-            <MenuItem value={'> 1500'}> &gt; 1500</MenuItem>
+            <MenuItem value={'1500 - 2000'}> &gt; 1500</MenuItem>
         </Select>
-        {productsWithLimit.map(product => (
-            <p key={product.id}>{product.title}: {product.description}</p>
+        {productsWithConditions.map(product => (
+            <Link
+                key={product.id}
+                to={product.id.toString()}
+            >
+                <p>Tittle: {product.title} - {product.description}</p>
+                <p>Price: {product.price}</p>
+                <p>Categories: {product.category.name}</p>
+            </Link>
+            // <p key={product.id}>{product.title}: {product.description}</p>
         ))}
         <button onClick={toPrevPage}>Prev</button>
         <button onClick={toNextPage}>Next</button>

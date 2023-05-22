@@ -7,12 +7,12 @@ import NotFound from './pages/NotFound'
 import Products from './pages/Products'
 import User from './pages/User'
 import RootLayout from './layouts/RootLayout'
+import Cart from './pages/Cart'
+import ProductDetails, { productDetailsLoader } from './pages/ProductDetails'
 //hooks
 // import { useAppSelector } from './hooks/useAppSelector'
 import { useAppDispatch } from './hooks/useAppDispatch'
 import { fetchAllProducts } from './redux/reducers/productsReducer'
-import Cart from './pages/Cart'
-import ProductDetails from './pages/ProductDetails'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,14 +25,16 @@ const router = createBrowserRouter(
         path='/'
         element={<Home />}
       />
+      <Route path='products/:id' element={<ProductDetails />} loader={productDetailsLoader} />
       <Route
         path='products'
         element={<Products />}
-      />
-      <Route
-        path='products/:id'
-        element={<ProductDetails />}
-      />
+      >
+        {/* <Route
+          path=':id'
+          element={<ProductDetails />}
+        /> */}
+      </Route>
       <Route
         path='cart'
         element={<Cart />}

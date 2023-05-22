@@ -6,13 +6,13 @@ import { Condition } from "../../types/Condition";
 // const initialState: Product[] = [];
 const initialState: {
     products: Product[],
-    productsWithLimit: Product[],
+    productsWithConditions: Product[],
     categories: Category[],
     loading: boolean,
     error: string
 } = {
     products: [],
-    productsWithLimit: [],
+    productsWithConditions: [],
     categories: [],
     loading: false,
     error: '',
@@ -73,6 +73,19 @@ export const fetchProductsByCategory = createAsyncThunk(
     }
 )
 
+// export const getProductDetails = createAsyncThunk(
+//     'getProductDetails',
+//     async (id: string) => {
+//         try {
+//             const response = await axios.get<Product>(`https://api.escuelajs.co/api/v1/products/${id}`);
+//             return response.data;
+//         } catch (e) {
+//             const error = e as AxiosError;
+//             return error;
+//         }
+//     }
+// )
+
 const productsSlice = createSlice({
     name: 'products',
     initialState,
@@ -97,9 +110,9 @@ const productsSlice = createSlice({
         })
         .addCase(fetchProductsWithConditions.fulfilled, (state, action) => {
             if (action.payload instanceof AxiosError) {
-                state.productsWithLimit = [];
+                state.productsWithConditions = [];
             } else {
-                state.productsWithLimit = action.payload;
+                state.productsWithConditions = action.payload;
             }
         })
         .addCase(fetchProductsWithConditions.rejected, () => {
@@ -121,7 +134,7 @@ const productsSlice = createSlice({
                 state.error = action.payload.message;
                 state.loading = false;
             } else {
-                state.productsWithLimit = action.payload;
+                state.productsWithConditions = action.payload;
                 state.loading = false;
             }
         })
