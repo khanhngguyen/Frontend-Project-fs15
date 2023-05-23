@@ -2,8 +2,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
 import { Category, Product } from "../../types/Product";
 import { Condition } from "../../types/Condition";
+import { NewProduct } from "../../types/NewProduct";
 
-// const initialState: Product[] = [];
 const initialState: {
     products: Product[],
     productsWithConditions: Product[],
@@ -86,10 +86,29 @@ export const fetchProductsByCategory = createAsyncThunk(
 //     }
 // )
 
+export const createNewProduct = createAsyncThunk(
+    'createNewProduct',
+    async (product: NewProduct) => {
+        try {
+            const response = await axios.post<Product>('https://api.escuelajs.co/api/v1/products/', product);
+            return response.data;
+        } catch (e) {
+            const error = e as AxiosError;
+            if (error.response) {
+                return JSON.stringify(error.response.data);
+            }
+            return error;
+        }
+    }
+)
+
 const productsSlice = createSlice({
     name: 'products',
     initialState,
     reducers: {
+        cleanUpProductReducer: (state) => {
+            return initialState;
+        }
     },
     extraReducers: (build) => {
         build.addCase(fetchAllProducts.fulfilled, (state, action) => {
@@ -145,9 +164,27 @@ const productsSlice = createSlice({
             state.error = 'can not fetch data';
             state.loading = false;
         })
+        .addCase(createNewProduct.fulfilled, (state, action) => {
+            if (action.payload instanceof AxiosError) {
+                state.error = action.payload.message;
+                state.loading = false;
+            } else if (typeof action.payload === 'string') {
+                state.error = action.payload;
+                state.loading = false;
+            } else {
+                state.products.push(action.payload);
+            }
+        })
+        .addCase(createNewProduct.pending, (state, action) => {
+            state.loading = true;
+        })
+        .addCase(createNewProduct.rejected, (state, action) => {
+            state.error = 'can not create new product';
+            state.loading = false;
+        })
     }
 })
 
-// export const { nextPage } = productsSlice.actions;
+export const { cleanUpProductReducer } = productsSlice.actions;
 const productsReducer = productsSlice.reducer;
 export default productsReducer;

@@ -29,12 +29,7 @@ const router = createBrowserRouter(
       <Route
         path='products'
         element={<Products />}
-      >
-        {/* <Route
-          path=':id'
-          element={<ProductDetails />}
-        /> */}
-      </Route>
+      />
       <Route
         path='cart'
         element={<Cart />}

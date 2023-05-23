@@ -77,8 +77,6 @@ const ProductsGrid = () => {
 
     return (
     <div>
-        <Typography>Products</Typography>
-        <Typography>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi impedit pariatur numquam dolorum repudiandae dolores neque tempore officiis perspiciatis quisquam, esse sapiente molestias provident porro! Doloremque esse culpa rem magnam?</Typography>
         {loading && <p>Loading...</p>}
         {error && <p>{error}</p>}
         <InputLabel>Sort by categories</InputLabel>
