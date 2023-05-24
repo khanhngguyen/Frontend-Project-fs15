@@ -75,7 +75,7 @@ const ProductCard = (props: ProductCardProps) => {
                 </IconButton>
             </Link>
         </CardActions>
-        <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+        <Snackbar open={open} autoHideDuration={1000} onClose={handleClose}>
             <Alert severity="success">
                 Product added to cart successfully!
             </Alert>

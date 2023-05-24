@@ -99,7 +99,7 @@ const Cart = () => {
         </TableBody>
       </Table>
     </TableContainer>
-    <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+    <Snackbar open={open} autoHideDuration={1000} onClose={handleClose}>
             <Alert severity="info">
                 Product removed from cart successfully!
             </Alert>

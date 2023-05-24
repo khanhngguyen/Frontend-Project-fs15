@@ -4,6 +4,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 import registrationSchema, { RegistrationFormData } from '../validations/registrationSchema';
 import GoogleLoginButton from '../components/User Page/GoogleLogin';
+import { Form } from 'react-router-dom';
 
 const User = () => {
   const { handleSubmit, control, formState: { errors } } = useForm<RegistrationFormData>({
@@ -28,7 +29,7 @@ const User = () => {
             margin='5px 0'
             textAlign='center'
           >Fill in the form to sign up & create a new account</Typography>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <Form onSubmit={handleSubmit(onSubmit)}>
             <Controller
               control={control}
               name='username'
@@ -104,7 +105,17 @@ const User = () => {
                 color='primary'
                 >Sign up</Button>
             </Box>
-          </form>
+          </Form>
+          <Typography textAlign='center' margin='10px auto'>Or</Typography>
+          <Form>
+            <Box textAlign='center' margin='10px auto'>
+              <Button
+                type='submit'
+                variant='contained'
+                color='primary'
+                >Sign in</Button>
+            </Box>
+          </Form>
           <Typography textAlign='center' margin='10px auto'>Or</Typography>
           <GoogleLoginButton />
         </Grid>

@@ -1,8 +1,12 @@
-import { AppBar, Box, Button, Container, CssBaseline, Toolbar, Typography } from '@mui/material'
 import React from 'react'
+import { Facebook, Instagram, LinkedIn, ShoppingCart, Twitter, YouTube } from '@mui/icons-material'
+import { AppBar, Badge, Box, Button, Container, CssBaseline, IconButton, Toolbar, Typography } from '@mui/material'
 import { Link, NavLink, Outlet } from 'react-router-dom'
 
+import { useAppSelector } from '../hooks/useAppSelector'
+
 const RootLayout = () => {
+    const { totalQuantity } = useAppSelector(state => state.cartReducer);
   return (
     <div>
         <CssBaseline />
@@ -23,7 +27,12 @@ const RootLayout = () => {
                         <Button sx={{ color: '#fff' }}>Products</Button>
                     </NavLink>
                     <NavLink to='cart'>
-                        <Button sx={{ color: '#fff' }}>Cart</Button>
+                        <Button sx={{ color: '#fff' }}>
+                            Cart
+                            <Badge badgeContent={totalQuantity} color="secondary">
+                                <ShoppingCart />
+                            </Badge>
+                        </Button>
                     </NavLink>
                     <NavLink to='user'>
                         <Button sx={{ color: '#fff' }}>Log in | Sign up</Button>
@@ -43,7 +52,7 @@ const RootLayout = () => {
                 {/* <NavLink to='/'>Home</NavLink>
                 <NavLink to='product'>Product</NavLink>
                 <NavLink to='user'>User</NavLink> */}
-                <Toolbar sx={{ justifyContent: 'center' }}>
+                <Toolbar sx={{ margin: '0 30px'}}>
                     <Link to='/'>
                         <Button sx={{ color: '#fff' }}>Home</Button>
                     </Link>
@@ -53,6 +62,13 @@ const RootLayout = () => {
                     <Link to='user'>
                         <Button sx={{ color: '#fff' }}>User</Button>
                     </Link>
+                    <Box ml='auto'>
+                        <IconButton><Twitter sx={{ color: 'white' }}/></IconButton>
+                        <IconButton><Instagram sx={{ color: 'white' }}/></IconButton>
+                        <IconButton><Facebook sx={{ color: 'white' }}/></IconButton>
+                        <IconButton><YouTube sx={{ color: 'white' }}/></IconButton>
+                        <IconButton><LinkedIn sx={{ color: 'white' }}/></IconButton>
+                    </Box>
                 </Toolbar>
             </AppBar>
         </Box>
