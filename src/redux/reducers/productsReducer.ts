@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
+
 import { Category, Product } from "../../types/Product";
 import { Condition } from "../../types/Condition";
 import { NewProduct } from "../../types/NewProduct";
@@ -129,9 +130,11 @@ const productsSlice = createSlice({
         })
         .addCase(fetchProductsWithConditions.fulfilled, (state, action) => {
             if (action.payload instanceof AxiosError) {
-                state.productsWithConditions = [];
+                state.error = action.payload.message;
+                state.loading = false;
             } else {
                 state.productsWithConditions = action.payload;
+                state.loading = false;
             }
         })
         .addCase(fetchProductsWithConditions.rejected, () => {

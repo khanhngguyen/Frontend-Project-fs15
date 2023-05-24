@@ -3,7 +3,7 @@ import { TextField, Typography } from '@mui/material';
 import { useAppSelector } from '../hooks/useAppSelector'
 import useDebounce from '../hooks/useDebounce';
 import { Product } from '../types/Product';
-import ProductsGrid from '../components/ProductsGrid';
+import ProductsGrid from '../components/Products Page/ProductsGrid';
 
 const getFilteredList = (products: Product[], search: string) => {
     return products.filter(product => product.title.toLowerCase().includes(search.toLowerCase()))

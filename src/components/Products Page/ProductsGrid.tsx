@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 
-import { useAppSelector } from '../hooks/useAppSelector'
-import { useAppDispatch } from '../hooks/useAppDispatch';
-import { fetchCategories, fetchProductsByCategory, fetchProductsWithConditions } from '../redux/reducers/productsReducer';
-import { InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material';
-import { Condition } from '../types/Condition';
+import { useAppSelector } from '../../hooks/useAppSelector'
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { fetchCategories, fetchProductsByCategory, fetchProductsWithConditions } from '../../redux/reducers/productsReducer';
+import { Box, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material';
+import { Condition } from '../../types/Condition';
 import { Link } from 'react-router-dom';
+import ProductCard from './ProductCard';
 
 const initialCondition: Condition = {
     price_min: 0,
@@ -102,19 +103,27 @@ const ProductsGrid = () => {
             <MenuItem value={'1000 - 1500'}>1000 - 1500</MenuItem>
             <MenuItem value={'1500 - 2000'}> &gt; 1500</MenuItem>
         </Select>
-        {productsWithConditions.map(product => (
-            <Link
-                key={product.id}
-                to={product.id.toString()}
-            >
-                <p>Tittle: {product.title} - {product.description}</p>
-                <p>Price: {product.price}</p>
-                <p>Categories: {product.category.name}</p>
-            </Link>
+        <Grid container>
+            <Grid item>
+                {productsWithConditions.map(product => (
+                    <ProductCard key={product.id} product={product}/>
+                ))}
+            </Grid>
+        </Grid>
+        {/* {productsWithConditions.map(product => (
+            <ProductCard key={product.id} product={product}/>
+            // <Link
+            //     key={product.id}
+            //     to={product.id.toString()}
+            // >
+            //     <p>Tittle: {product.title} - {product.description}</p>
+            //     <p>Price: {product.price}</p>
+            //     <p>Categories: {product.category.name}</p>
+            // </Link>
             // <p key={product.id}>{product.title}: {product.description}</p>
         ))}
         <button onClick={toPrevPage}>Prev</button>
-        <button onClick={toNextPage}>Next</button>
+        <button onClick={toNextPage}>Next</button> */}
     </div>
   )
 }
