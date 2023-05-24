@@ -9,6 +9,10 @@ export interface Product {
   category: Category;
 }
 
+export interface ProductWithQuantity extends Product {
+  quantity: number;
+}
+
 export interface Category {
   id: number;
   name: string;
