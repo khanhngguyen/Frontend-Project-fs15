@@ -15,6 +15,8 @@ const ProductCard = (props: ProductCardProps) => {
     const [open, setOpen] = useState(false);
     const { cart, totalQuantity, totalPrice } = useAppSelector(state => state.cartReducer);
     const dispatch = useAppDispatch();
+
+    //functions: add product to cart & show alert on success
     const handleAddToCart = () => {
         dispatch(addToCart(props.product));
         console.log(cart, totalQuantity, totalPrice);
@@ -26,6 +28,7 @@ const ProductCard = (props: ProductCardProps) => {
         }
         setOpen(false);
     };
+
   return (
     <Card sx={{ maxWidth: 330, display: 'inline-block' }}>
         <CardHeader

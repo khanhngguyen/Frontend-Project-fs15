@@ -28,7 +28,7 @@ const ProductsGrid = () => {
     }, [])
 
     //functions to next/prev pages
-    const limit = 10;
+    const limit = 15;
     const toNextPage = () => {
         const nextOffset = conditions.offset + limit
         setConditions({...conditions, offset: nextOffset})
@@ -109,6 +109,8 @@ const ProductsGrid = () => {
                     <ProductCard key={product.id} product={product}/>
                 ))}
             </Grid>
+            <button onClick={toPrevPage}>Prev</button>
+            <button onClick={toNextPage}>Next</button>
         </Grid>
         {/* {productsWithConditions.map(product => (
             <ProductCard key={product.id} product={product}/>
@@ -121,9 +123,7 @@ const ProductsGrid = () => {
             //     <p>Categories: {product.category.name}</p>
             // </Link>
             // <p key={product.id}>{product.title}: {product.description}</p>
-        ))}
-        <button onClick={toPrevPage}>Prev</button>
-        <button onClick={toNextPage}>Next</button> */}
+        ))} */}
     </div>
   )
 }

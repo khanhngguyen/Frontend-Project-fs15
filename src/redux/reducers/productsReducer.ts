@@ -37,9 +37,9 @@ export const fetchProductsWithConditions = createAsyncThunk(
     'fetchProductsWithConditions',
     async ({price_min = 0, price_max = 2000, offset = 0} : Condition) => {
         try {
-            const response = await axios.get<Product[]>(`https://api.escuelajs.co/api/v1/products/?price_min=${price_min}&price_max=${price_max}&offset=${offset}&limit=10`);
+            const response = await axios.get<Product[]>(`https://api.escuelajs.co/api/v1/products/?price_min=${price_min}&price_max=${price_max}&offset=${offset}&limit=15`);
             console.log('fetchProductsWithConditions run');
-            console.log(`https://api.escuelajs.co/api/v1/products/?price_min=${price_min}&price_max=${price_max}&offset=${offset}&limit=10`);
+            console.log(`https://api.escuelajs.co/api/v1/products/?price_min=${price_min}&price_max=${price_max}&offset=${offset}&limit=15`);
             return response.data;
         } catch (e) {
             const error = e as AxiosError;

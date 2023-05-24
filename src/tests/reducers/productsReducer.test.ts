@@ -1,7 +1,8 @@
+import productServer from "../servers/productServer";
+
 import { cleanUpProductReducer, createNewProduct, fetchAllProducts } from "../../redux/reducers/productsReducer"
 import store from "../../redux/store"
 import { invalidProduct, newProduct } from "../data/products";
-import productServer from "../servers/productServer";
 
 beforeEach(() => {
     store.dispatch(cleanUpProductReducer());
