@@ -33,10 +33,46 @@ const cartSlice = createSlice({
             state.cart = [];
             state.totalPrice = 0;
             state.totalQuantity = 0;
+        },
+        addQuantity: (state, action: PayloadAction<number>) => {
+            const isExisted = state.cart.find(item => item.id === action.payload);
+            if (!isExisted) {
+                return;
+            } else {
+                isExisted.quantity++;
+                state.totalQuantity++;
+                state.totalPrice += isExisted.price;
+                console.log(isExisted.quantity);
+            }
+        },
+        subtractQuantity: (state, action: PayloadAction<number>) => {
+            const isExisted = state.cart.find(item => item.id === action.payload);
+            if (!isExisted) {
+                return;
+            } else {
+                if (isExisted.quantity === 1) {
+                    state.cart = state.cart.filter(item => item.id !== action.payload);
+                } else {
+                    isExisted.quantity--;
+                }
+                state.totalQuantity--;
+                state.totalPrice -= isExisted.price;
+                console.log(isExisted.quantity);
+            }
+        },
+        removeFromCart: (state, action: PayloadAction<number>) => {
+            const isExisted = state.cart.find(item => item.id === action.payload);
+            if (!isExisted) {
+                return;
+            } else {
+                state.totalQuantity -= isExisted.quantity;
+                state.totalPrice = isExisted.price * isExisted.quantity;
+                state.cart = state.cart.filter(item => item.id !== action.payload);
+            }
         }
     }
 })
 
-export const { addToCart, emptyCart } = cartSlice.actions;
+export const { addToCart, emptyCart, addQuantity, subtractQuantity, removeFromCart } = cartSlice.actions;
 const cartReducer = cartSlice.reducer;
 export default cartReducer;
