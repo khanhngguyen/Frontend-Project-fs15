@@ -1,6 +1,6 @@
 import React from 'react'
 import { Facebook, Instagram, LinkedIn, ShoppingCart, Twitter, YouTube } from '@mui/icons-material'
-import { AppBar, Badge, Box, Button, Container, CssBaseline, IconButton, Toolbar, Typography } from '@mui/material'
+import { AppBar, Badge, Box, Button, Container, IconButton, Toolbar, Typography } from '@mui/material'
 import { Link, NavLink, Outlet } from 'react-router-dom'
 
 import { useAppSelector } from '../hooks/useAppSelector'
@@ -9,7 +9,6 @@ const RootLayout = () => {
     const { totalQuantity } = useAppSelector(state => state.cartReducer);
   return (
     <div>
-        <CssBaseline />
         <Box component="header">
             <AppBar component='nav' position='sticky'>
                 <Toolbar>

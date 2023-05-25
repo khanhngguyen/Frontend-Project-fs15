@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import { Grid, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 
 import { useAppSelector } from '../../hooks/useAppSelector'
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { fetchCategories, fetchProductsByCategory, fetchProductsWithConditions } from '../../redux/reducers/productsReducer';
-import { Box, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material';
 import { Condition } from '../../types/Condition';
-import { Link } from 'react-router-dom';
 import ProductCard from './ProductCard';
 
 const initialCondition: Condition = {

@@ -1,7 +1,8 @@
-import { Box, Button, Grid, InputLabel, Paper, TextField, Typography } from '@mui/material';
 import React from 'react'
+import { Box, Button, Grid, InputLabel, Paper, TextField, Typography } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
+
 import registrationSchema, { RegistrationFormData } from '../validations/registrationSchema';
 import GoogleLoginButton from '../components/User Page/GoogleLogin';
 import { Form } from 'react-router-dom';
@@ -11,7 +12,7 @@ const User = () => {
     resolver: yupResolver(registrationSchema)
   });
   const onSubmit = (data: RegistrationFormData) => {
-
+    console.log(data);
   }
 
   const paperStyle = { padding: '30px 20px', width: 500, margin: '20px auto' };
@@ -35,7 +36,7 @@ const User = () => {
               name='username'
               render={({ field: { onChange, value }}) => (
                 <>
-                <InputLabel htmlFor='username'>Username:</InputLabel>
+                <InputLabel htmlFor='username'>*Username:</InputLabel>
                 <TextField
                   placeholder='Username'
                   fullWidth
@@ -52,7 +53,7 @@ const User = () => {
               name='email'
               render={({ field: { onChange, value }}) => (
                 <>
-                <InputLabel htmlFor='email'>Email:</InputLabel>
+                <InputLabel htmlFor='email'>*Email:</InputLabel>
                 <TextField
                   placeholder='Email'
                   type='email'
@@ -69,7 +70,7 @@ const User = () => {
               name='password'
               render={({ field: { onChange, value }}) => (
                 <>
-                <InputLabel htmlFor='password'>Password:</InputLabel>
+                <InputLabel htmlFor='password'>*Password:</InputLabel>
                 <TextField
                   placeholder='Password'
                   type='password'
@@ -86,7 +87,7 @@ const User = () => {
               name='confirm'
               render={({ field: { onChange, value }}) => (
                 <>
-                <InputLabel htmlFor='confirm'>Confirm password:</InputLabel>
+                <InputLabel htmlFor='confirm'>*Confirm password:</InputLabel>
                 <TextField
                   placeholder='Type in your password again'
                   type='password'
