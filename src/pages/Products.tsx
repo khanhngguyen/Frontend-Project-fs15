@@ -5,6 +5,7 @@ import { useAppSelector } from '../hooks/useAppSelector'
 import useDebounce from '../hooks/useDebounce';
 import { Product } from '../types/Product';
 import ProductsGrid from '../components/Products Page/ProductsGrid';
+import SearchResult from '../components/Products Page/SearchResult';
 
 const getFilteredList = (products: Product[], search: string) => {
     return products.filter(product => product.title.toLowerCase().includes(search.toLowerCase()))
@@ -33,13 +34,15 @@ const Products = () => {
             value={search}
             onChange={handleSearchInput}
         />
-        <button>Search</button>
         {/* <p>Search input: {search}</p>
         <p>Debounced value: {debouncedSearchInput}</p> */}
-        {debouncedSearchInput && filteredProducts.map(product => (
+        {/* {debouncedSearchInput && filteredProducts.map(product => (
             <p key={product.id}>{product.title}: {product.description}</p>
+        ))} */}
+        {debouncedSearchInput && filteredProducts.map(product => (
+            <SearchResult key={product.id} product={product} />
         ))}
-        <p>----------------------</p>
+        <hr />
         <ProductsGrid />
         {/* <Grid container spacing={2}>
             {filteredProducts.map(product => (

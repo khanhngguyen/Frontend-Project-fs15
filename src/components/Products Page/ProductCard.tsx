@@ -69,7 +69,7 @@ const ProductCard = (props: ProductCardProps) => {
                 <Typography variant='body1' color='text.primary'>Add to cart</Typography>
             </IconButton>
             <Link href={'products/' + props.product.id.toString()} underline="none" marginLeft='auto'>
-                Seemore
+                See more
                 <IconButton>
                     <ReadMore fontSize='large'/>
                 </IconButton>

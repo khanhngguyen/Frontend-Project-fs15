@@ -13,7 +13,7 @@ import Profile from './pages/Profile'
 //hooks
 // import { useAppSelector } from './hooks/useAppSelector'
 import { useAppDispatch } from './hooks/useAppDispatch'
-import { fetchAllProducts } from './redux/reducers/productsReducer'
+import { fetchAllProducts, fetchCategories } from './redux/reducers/productsReducer'
 import { fetchAllUsers } from './redux/reducers/userReducer'
 
 const router = createBrowserRouter(
@@ -58,6 +58,7 @@ const App = () => {
   useEffect(() => {
     dispatch(fetchAllProducts());
     dispatch(fetchAllUsers());
+    dispatch(fetchCategories());
   }, [])
   return (
     <>

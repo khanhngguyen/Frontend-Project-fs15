@@ -1,9 +1,10 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
 
 import { Category, Product } from "../../types/Product";
 import { Condition } from "../../types/Condition";
 import { NewProduct } from "../../types/NewProduct";
+import { ProductUpdate } from "../../types/ProductUpdate";
 
 const initialState: {
     products: Product[],
@@ -18,6 +19,17 @@ const initialState: {
     loading: false,
     error: '',
 }
+
+const sortByPrice = (products: Product[], order: string) => {
+  const sorted = products.sort((a, b) => {
+    if (order === 'Low to high') {
+      return a.price - b.price;
+    } else {
+      return b.price - a.price;
+    }
+  });
+  return sorted;
+};
 
 export const fetchAllProducts = createAsyncThunk(
     'fetchAllProducts',
@@ -35,11 +47,10 @@ export const fetchAllProducts = createAsyncThunk(
 
 export const fetchProductsWithConditions = createAsyncThunk(
     'fetchProductsWithConditions',
-    async ({price_min = 0, price_max = 2000, offset = 0} : Condition) => {
+    async ({price_min = 0, price_max = 2000, offset = 0, limit = 15} : Condition) => {
         try {
-            const response = await axios.get<Product[]>(`https://api.escuelajs.co/api/v1/products/?price_min=${price_min}&price_max=${price_max}&offset=${offset}&limit=15`);
+            const response = await axios.get<Product[]>(`https://api.escuelajs.co/api/v1/products/?price_min=${price_min}&price_max=${price_max}&offset=${offset}&limit=${limit}&categoryId=`);
             console.log('fetchProductsWithConditions run');
-            console.log(`https://api.escuelajs.co/api/v1/products/?price_min=${price_min}&price_max=${price_max}&offset=${offset}&limit=15`);
             return response.data;
         } catch (e) {
             const error = e as AxiosError;
@@ -103,12 +114,32 @@ export const createNewProduct = createAsyncThunk(
     }
 )
 
+export const updateProduct = createAsyncThunk(
+    'updateProduct',
+    async({ id, product } : { id: number, product: ProductUpdate }) => {
+        try {
+            const response = await axios.put<Product>('https://api.escuelajs.co/api/v1/products/1', {id, product});
+            return response.data;
+        } catch (e) {
+            const error = e as AxiosError;
+            return error;
+        }
+    }
+)
+
 const productsSlice = createSlice({
     name: 'products',
     initialState,
     reducers: {
         cleanUpProductReducer: (state) => {
             return initialState;
+        },
+        sortProductsByPrice: (state, action:PayloadAction<string>) => {
+            const sorted = sortByPrice(
+                state.productsWithConditions,
+                action.payload
+            );
+            state.productsWithConditions = sorted;
         }
     },
     extraReducers: (build) => {
@@ -188,6 +219,6 @@ const productsSlice = createSlice({
     }
 })
 
-export const { cleanUpProductReducer } = productsSlice.actions;
+export const { cleanUpProductReducer, sortProductsByPrice } = productsSlice.actions;
 const productsReducer = productsSlice.reducer;
 export default productsReducer;
