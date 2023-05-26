@@ -51,7 +51,7 @@ Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 ## Project result
-
+[Live demo available here](https://kim-frontend-project-fs15.netlify.app/)
 
 ### Working features
 - Display products, with filter & sort by price, also with options to set limit of products per page
