@@ -121,7 +121,7 @@ const productsSlice = createSlice({
                 state.loading = false;
             }
         })
-        .addCase(fetchAllProducts.pending, (state, action) => {
+        .addCase(fetchAllProducts.pending, (state) => {
             state.loading = true;
         })
         .addCase(fetchAllProducts.rejected, (state, action) => {
@@ -160,7 +160,7 @@ const productsSlice = createSlice({
                 state.loading = false;
             }
         })
-        .addCase(fetchProductsByCategory.pending, (state, action) => {
+        .addCase(fetchProductsByCategory.pending, (state) => {
             state.loading = true;
         })
         .addCase(fetchProductsByCategory.rejected, (state, action) => {
@@ -178,7 +178,7 @@ const productsSlice = createSlice({
                 state.products.push(action.payload);
             }
         })
-        .addCase(createNewProduct.pending, (state, action) => {
+        .addCase(createNewProduct.pending, (state) => {
             state.loading = true;
         })
         .addCase(createNewProduct.rejected, (state, action) => {

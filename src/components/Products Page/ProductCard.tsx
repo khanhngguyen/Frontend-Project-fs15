@@ -30,7 +30,7 @@ const ProductCard = (props: ProductCardProps) => {
     };
 
   return (
-    <Card sx={{ maxWidth: 330, display: 'inline-block' }}>
+    <Card sx={{ width: 330, display: 'inline-block' }}>
         <CardHeader
             sx={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
             action={

@@ -7,6 +7,7 @@ import { useAppSelector } from '../hooks/useAppSelector'
 
 const RootLayout = () => {
     const { totalQuantity } = useAppSelector(state => state.cartReducer);
+    const { currentUser } = useAppSelector(state => state.userReducer);
   return (
     <div>
         <Box component="header">
@@ -33,9 +34,15 @@ const RootLayout = () => {
                             </Badge>
                         </Button>
                     </NavLink>
-                    <NavLink to='user'>
+                    {currentUser
+                    ? <NavLink to='profile'>
+                        <Button sx={{ color: '#fff' }}>Hi: {currentUser.name.toUpperCase()}!</Button>
+                    </NavLink>
+                    : 
+                    <NavLink to='login'>
                         <Button sx={{ color: '#fff' }}>Log in | Sign up</Button>
                     </NavLink>
+                    }
                     {/* <NavLink to='product'>Product</NavLink>
                     <NavLink to='user'>User</NavLink> */}
                 </Toolbar>
@@ -58,8 +65,8 @@ const RootLayout = () => {
                     <Link to='products'>
                         <Button sx={{ color: '#fff' }}>Products</Button>
                     </Link>
-                    <Link to='user'>
-                        <Button sx={{ color: '#fff' }}>User</Button>
+                    <Link to='login'>
+                        <Button sx={{ color: '#fff' }}>Log in| Sign up</Button>
                     </Link>
                     <Box ml='auto'>
                         <IconButton><Twitter sx={{ color: 'white' }}/></IconButton>

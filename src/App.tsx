@@ -3,16 +3,18 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 
 //pages
 import Home from './pages/Home'
+import LogIn from './pages/LogIn'
 import NotFound from './pages/NotFound'
 import Products from './pages/Products'
-import User from './pages/User'
 import RootLayout from './layouts/RootLayout'
 import Cart from './pages/Cart'
 import ProductDetails, { productDetailsLoader } from './pages/ProductDetails'
+import Profile from './pages/Profile'
 //hooks
 // import { useAppSelector } from './hooks/useAppSelector'
 import { useAppDispatch } from './hooks/useAppDispatch'
 import { fetchAllProducts } from './redux/reducers/productsReducer'
+import { fetchAllUsers } from './redux/reducers/userReducer'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -35,8 +37,16 @@ const router = createBrowserRouter(
         element={<Cart />}
       />
       <Route
-        path='user'
-        element={<User />}
+        path='login'
+        element={<LogIn />}
+      />
+      <Route
+        path='login'
+        element={<LogIn />}
+      />
+      <Route
+        path='profile'
+        element={<Profile />}
       />
     </Route>
   )
@@ -47,6 +57,7 @@ const App = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(fetchAllProducts());
+    dispatch(fetchAllUsers());
   }, [])
   return (
     <>
