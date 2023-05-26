@@ -93,7 +93,6 @@ export const productDetailsLoader = async({ params }: any) => {
   return response.data;
  } catch (e) {
   const error = e as AxiosError;
-  console.log(error.message);
   return error.message;
  }
 }

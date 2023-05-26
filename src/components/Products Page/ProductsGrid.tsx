@@ -6,6 +6,7 @@ import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { fetchProductsWithConditions, sortProductsByPrice } from '../../redux/reducers/productsReducer';
 import { Condition } from '../../types/Condition';
 import ProductCard from './ProductCard';
+import { wrap } from 'module';
 
 const initialCondition: Condition = {
     price_min: 0,
@@ -126,7 +127,15 @@ const ProductsGrid = () => {
         {loading && <p>Loading...</p>}
         {error && <p>{error}</p>}
         <Grid container>
-            <Grid item>
+            <Grid
+                item
+                sx={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    gap: '20px',
+                    justifyContent: 'space-between'
+                }}
+            >
                 {productsWithConditions.map(product => (
                     <ProductCard key={product.id} product={product}/>
                 ))}

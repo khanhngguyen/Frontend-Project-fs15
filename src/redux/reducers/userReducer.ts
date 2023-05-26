@@ -22,7 +22,7 @@ export const fetchAllUsers = createAsyncThunk(
     async () => {
         try {
             const response = await axios.get<User[]>('https://api.escuelajs.co/api/v1/users');
-            console.log('fetchAllUsers run');
+            // console.log('fetchAllUsers run');
             return response.data;
         } catch (e) {
             const error = e as AxiosError;
@@ -141,7 +141,7 @@ const userSlice = createSlice({
                 state.error = action.payload;
             } else {
                 state.users.push(action.payload);
-                console.log('new user created');
+                // console.log('new user created');
             }
             state.loading = false;
         })
@@ -171,7 +171,7 @@ const userSlice = createSlice({
                 state.error = action.payload.message;
             } else {
                 state.currentUser = action.payload;
-                console.log('log in successfully');
+                // console.log('log in successfully');
             }
             state.loading = false;
         })

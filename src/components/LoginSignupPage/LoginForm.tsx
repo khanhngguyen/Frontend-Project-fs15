@@ -15,7 +15,7 @@ const LoginForm = () => {
     })
     const navigate = useNavigate();
     const handleLogin = (data: LoginFormData) => {
-        console.log(data);
+        // console.log(data);
         dispatch(login({
           email: data.email,
           password: data.password

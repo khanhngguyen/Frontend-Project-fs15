@@ -37,13 +37,13 @@ const Cart = () => {
 
   return (
     <div>
-      <div>Cart: total quantity: {totalQuantity}, total price: {totalPrice}</div>
-      <div>
+      {/* <div>Cart: total quantity: {totalQuantity}, total price: {totalPrice}</div> */}
+      {/* <div>
         Cart items:
         {cart.map(product => (
           <p key={product.id}>{product.title}, quantity: {product.quantity}</p>
           ))}
-      </div>
+      </div> */}
       <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>

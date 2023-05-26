@@ -5,7 +5,7 @@ import { Alert, Card, CardActions, CardContent, CardHeader, CardMedia, IconButto
 import { Product } from '../../types/Product'
 import { useAppDispatch } from '../../hooks/useAppDispatch'
 import { addToCart } from '../../redux/reducers/cartReducer'
-import { useAppSelector } from '../../hooks/useAppSelector'
+// import { useAppSelector } from '../../hooks/useAppSelector'
 
 interface ProductCardProps {
     product: Product
@@ -13,13 +13,13 @@ interface ProductCardProps {
 
 const ProductCard = (props: ProductCardProps) => {
     const [open, setOpen] = useState(false);
-    const { cart, totalQuantity, totalPrice } = useAppSelector(state => state.cartReducer);
+    // const { cart, totalQuantity, totalPrice } = useAppSelector(state => state.cartReducer);
     const dispatch = useAppDispatch();
 
     //functions: add product to cart & show alert on success
     const handleAddToCart = () => {
         dispatch(addToCart(props.product));
-        console.log(cart, totalQuantity, totalPrice);
+        // console.log(cart, totalQuantity, totalPrice);
     }
     const handleOpen = () => setOpen(true);
     const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {

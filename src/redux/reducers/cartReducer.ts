@@ -20,11 +20,11 @@ const cartSlice = createSlice({
             //if product already exists in cart
             if (isExisted) {
                 isExisted.quantity++;
-                console.log('product existed in cart, update quantity');
+                // console.log('product existed in cart, update quantity');
             } else {
                 //product is not yet in cart
                 state.cart.push({...action.payload, quantity: 1});
-                console.log('added new product');
+                // console.log('added new product');
             }
             state.totalQuantity++;
             state.totalPrice += action.payload.price;
@@ -42,7 +42,7 @@ const cartSlice = createSlice({
                 isExisted.quantity++;
                 state.totalQuantity++;
                 state.totalPrice += isExisted.price;
-                console.log(isExisted.quantity);
+                // console.log(isExisted.quantity);
             }
         },
         subtractQuantity: (state, action: PayloadAction<number>) => {
@@ -57,7 +57,7 @@ const cartSlice = createSlice({
                 }
                 state.totalQuantity--;
                 state.totalPrice -= isExisted.price;
-                console.log(isExisted.quantity);
+                // console.log(isExisted.quantity);
             }
         },
         removeFromCart: (state, action: PayloadAction<number>) => {

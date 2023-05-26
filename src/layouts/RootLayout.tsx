@@ -49,7 +49,7 @@ const RootLayout = () => {
             </AppBar>
         </Box>
         <Container maxWidth='lg'>
-            <Box sx={{ bgcolor: '#cfe8fc', height: '100%', minHeight: '100vh', pb: 7}}>
+            <Box sx={{ height: '100%', minHeight: '100vh', py: '20px'}}>
                 <Outlet />
             </Box>
         </Container>

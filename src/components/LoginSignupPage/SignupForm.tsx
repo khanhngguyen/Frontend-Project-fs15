@@ -17,7 +17,7 @@ const SignupForm = () => {
     const dispatch = useAppDispatch();
 
     const handleRegisterSubmit = (data: RegistrationFormData) => {
-        console.log(data);
+        // console.log(data);
         const emailAvailable = users.find(user => user.email === data.email);
         if (emailAvailable) {
         alert('This email is already registered, please try another one');

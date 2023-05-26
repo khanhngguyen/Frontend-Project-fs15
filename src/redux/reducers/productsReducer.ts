@@ -36,7 +36,7 @@ export const fetchAllProducts = createAsyncThunk(
     async () => {
         try {
             const response = await axios.get<Product[]>('https://api.escuelajs.co/api/v1/products');
-            console.log('fetchAllProducts run');
+            // console.log('fetchAllProducts run');
             return response.data;
         } catch (e) {
             const error = e as AxiosError;
@@ -50,7 +50,7 @@ export const fetchProductsWithConditions = createAsyncThunk(
     async ({price_min = 0, price_max = 2000, offset = 0, limit = 15} : Condition) => {
         try {
             const response = await axios.get<Product[]>(`https://api.escuelajs.co/api/v1/products/?price_min=${price_min}&price_max=${price_max}&offset=${offset}&limit=${limit}&categoryId=`);
-            console.log('fetchProductsWithConditions run');
+            // console.log('fetchProductsWithConditions run');
             return response.data;
         } catch (e) {
             const error = e as AxiosError;
@@ -169,18 +169,18 @@ const productsSlice = createSlice({
             }
         })
         .addCase(fetchProductsWithConditions.rejected, () => {
-            console.log('can not fetch data');
+            // console.log('can not fetch data');
         })
         .addCase(fetchCategories.fulfilled, (state, action) => {
             if (action.payload instanceof AxiosError) {
                 state.categories = [];
             } else {
                 state.categories = action.payload;
-                console.log(state.categories);
+                // console.log(state.categories);
             }
         })
         .addCase(fetchCategories.rejected, () => {
-            console.log('can not fetch categories');
+            // console.log('can not fetch categories');
         })
         .addCase(fetchProductsByCategory.fulfilled, (state, action) => {
             if (action.payload instanceof AxiosError) {
