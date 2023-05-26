@@ -55,9 +55,6 @@ const RootLayout = () => {
         </Container>
         <Box component='footer'>
             <AppBar component='nav' position='sticky'>
-                {/* <NavLink to='/'>Home</NavLink>
-                <NavLink to='product'>Product</NavLink>
-                <NavLink to='user'>User</NavLink> */}
                 <Toolbar sx={{ margin: '0 30px'}}>
                     <Link to='/'>
                         <Button sx={{ color: '#fff' }}>Home</Button>
@@ -65,9 +62,9 @@ const RootLayout = () => {
                     <Link to='products'>
                         <Button sx={{ color: '#fff' }}>Products</Button>
                     </Link>
-                    <Link to='login'>
+                    {/* <Link to='login'>
                         <Button sx={{ color: '#fff' }}>Log in| Sign up</Button>
-                    </Link>
+                    </Link> */}
                     <Box ml='auto'>
                         <IconButton><Twitter sx={{ color: 'white' }}/></IconButton>
                         <IconButton><Instagram sx={{ color: 'white' }}/></IconButton>

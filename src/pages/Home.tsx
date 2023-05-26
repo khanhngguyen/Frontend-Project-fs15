@@ -4,6 +4,7 @@ import { ArrowRightAlt } from '@mui/icons-material'
 
 import MansoryImageList from '../components/Home Page/MansoryImageList'
 import ImageSlider from '../components/Home Page/ImageSlider'
+import Categories from '../components/Home Page/Categories'
 
 const Home = () => {
   return (
@@ -28,6 +29,7 @@ const Home = () => {
       <Typography variant='h5' align='center'>
         Or browse by categories
       </Typography>
+      <Categories />
     </div>
   )
 }
