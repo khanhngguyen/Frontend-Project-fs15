@@ -5,6 +5,7 @@ import { ArrowRightAlt } from '@mui/icons-material'
 import MansoryImageList from '../components/Home Page/MansoryImageList'
 import ImageSlider from '../components/Home Page/ImageSlider'
 import Categories from '../components/Home Page/Categories'
+import { NavLink } from 'react-router-dom'
 
 const Home = () => {
   return (
@@ -18,13 +19,12 @@ const Home = () => {
       <ImageSlider />
       <Box textAlign='center'>
         <Typography variant='h5' align='center'>Browse all products</Typography>
-        <Button
-          variant='outlined'
-          href='/products'
-        >
-          To all products page
-          <IconButton><ArrowRightAlt color='primary' /></IconButton>
-        </Button>
+        <NavLink to='products'>
+          <Button variant='outlined'>
+            To all products page
+            <IconButton><ArrowRightAlt color='primary' /></IconButton>
+          </Button>
+        </NavLink>
       </Box>
       <Typography variant='h5' align='center'>
         Or browse by categories
