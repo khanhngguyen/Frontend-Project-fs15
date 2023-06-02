@@ -5,7 +5,7 @@ import { ArrowRightAlt } from '@mui/icons-material';
 import { useAppSelector } from '../hooks/useAppSelector'
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { logOut } from '../redux/reducers/userReducer';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Profile = () => {
     const navigate = useNavigate();
@@ -28,15 +28,15 @@ const Profile = () => {
         <Typography>
             Hi {currentUser?.name}, you are currently logged in.
         </Typography>
-        <Typography>
-            <Button
-                href='/'
-                variant='outlined'
-            >
-                Back to Home
-                <IconButton><ArrowRightAlt color='primary' /></IconButton>
-            </Button>
-        </Typography>
+        <Button variant='outlined'>
+          <Link
+            to="/"
+            style={{ textDecoration: 'none'}}
+          >
+            Back to Home
+            <IconButton><ArrowRightAlt color='primary' /></IconButton>
+          </Link>
+        </Button>
         <Typography>Or</Typography>
         <Button
             variant='outlined'

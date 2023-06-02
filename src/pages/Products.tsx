@@ -19,7 +19,7 @@ const Products = () => {
     const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value);
     }
-    const debouncedSearchInput = useDebounce(search, 500);
+    const debouncedSearchInput = useDebounce(search, 1000);
     const filteredProducts = getFilteredList(products, debouncedSearchInput);
 
   return (

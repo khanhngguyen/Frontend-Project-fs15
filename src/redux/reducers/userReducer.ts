@@ -99,6 +99,7 @@ export const login = createAsyncThunk(
         try {
             const response = await axios.post<{ access_token: string }>('https://api.escuelajs.co/api/v1/auth/login', { email, password });
             localStorage.setItem('token', response.data.access_token);
+            console.log(response.data.access_token);
             const authentication = await dispatch(authenticate(response.data.access_token));
             return authentication.payload as User;
         } catch (e) {
@@ -114,7 +115,7 @@ const userSlice = createSlice({
     reducers: {
         logOut: (state) => {
             state.currentUser = null;
-            localStorage.removeItem('token');
+            localStorage.removeItem("currentUser");
         } 
     },
     extraReducers: (build) => {
@@ -166,11 +167,29 @@ const userSlice = createSlice({
         .addCase(updateUser.rejected, (state) => {
             state.error = 'can not update user';
         })
-        .addCase(login.fulfilled, (state, action) => {
-            if (action.payload instanceof AxiosError) {
-                state.error = action.payload.message;
+        .addCase(authenticate.fulfilled, (state, action) => {
+            if (action.payload instanceof AxiosError)
+            {
+                // state.error = action.payload.message;
+                state.error = "Authentication failed, user is not registerd";
             } else {
                 state.currentUser = action.payload;
+            } 
+        })
+        .addCase(authenticate.pending, (state) => {
+            state.loading = true;
+        })
+        .addCase(authenticate.rejected, (state, action) => {
+            state.error = 'Authenticate failed';
+        })
+        .addCase(login.fulfilled, (state, action) => {
+            if (action.payload instanceof AxiosError) {
+                // state.error = action.payload.message;
+                state.error = action.payload.request.statusText + " or Wrong password!";
+            } else {
+                state.currentUser = action.payload;
+                state.error = '';
+                localStorage.setItem("currentUser", JSON.stringify(state.currentUser));
                 // console.log('log in successfully');
             }
             state.loading = false;

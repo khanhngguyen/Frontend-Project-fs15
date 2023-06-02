@@ -1,8 +1,9 @@
 import React from 'react'
 
 import { Product } from '../../types/Product'
-import { Card, CardActions, CardContent, IconButton, Link, Typography } from '@mui/material'
+import { Card, CardActions, CardContent, IconButton, Typography } from '@mui/material'
 import { ReadMore } from '@mui/icons-material'
+import { Link } from 'react-router-dom'
 
 interface SearchResultProps {
     product: Product
@@ -35,12 +36,20 @@ const SearchResult = (props: SearchResultProps) => {
                 </Typography>
             </CardContent>
             <CardActions>
-               <Link href={'products/' + props.product.id.toString()} underline="none" fontSize='14px'>
+                <Link
+                    to={props.product.id.toString()}
+                >
+                    More details
+                    <IconButton>
+                        <ReadMore fontSize='large' />
+                    </IconButton>
+                </Link>
+               {/* <Link href={'products/' + props.product.id.toString()} underline="none" fontSize='14px'>
                 More details
                 <IconButton>
                     <ReadMore fontSize='large'/>
                 </IconButton>
-                </Link>
+                </Link> */}
             </CardActions>
         </Card>
     </div>

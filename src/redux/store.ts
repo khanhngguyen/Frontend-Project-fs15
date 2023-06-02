@@ -12,6 +12,10 @@ const store = configureStore({
     }
 })
 
+// store.subscribe(() => {
+//     localStorage.setItem("currentUser", JSON.stringify(store.getState().userReducer));
+// })
+
 export type GlobalState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 

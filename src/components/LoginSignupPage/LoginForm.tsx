@@ -8,6 +8,7 @@ import loginSchema, { LoginFormData } from '../../validations/loginSchema';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { login } from '../../redux/reducers/userReducer';
 import GoogleLoginButton from './GoogleLogin';
+import { useAppSelector } from '../../hooks/useAppSelector';
 
 const LoginForm = () => {
     const { handleSubmit, control, formState: { errors } } = useForm<LoginFormData>({
@@ -20,10 +21,12 @@ const LoginForm = () => {
           email: data.email,
           password: data.password
         }))
-        navigate('/profile');
+        // if (currentUser) navigate('/profile');
+        // navigate('/profile');
     }
-    // const { users } = useAppSelector(state => state.userReducer);
+    const { error, currentUser } = useAppSelector(state => state.userReducer);
     const dispatch = useAppDispatch();
+    if (currentUser) navigate('/profile');
   return (
     <div>
         <Typography
@@ -67,6 +70,7 @@ const LoginForm = () => {
                 </>
               )}
             />
+            {error && <p>{error}</p>}
             <Box textAlign='center' margin='10px auto'>
               <Button
                 type='submit'
