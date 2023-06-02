@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { AddShoppingCart, MoreVert, ReadMore } from '@mui/icons-material'
-import { Alert, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Link, Snackbar, Typography } from '@mui/material'
+import { Alert, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Snackbar, Typography } from '@mui/material'
 
 import { Product } from '../../types/Product'
 import { useAppDispatch } from '../../hooks/useAppDispatch'
 import { addToCart } from '../../redux/reducers/cartReducer'
+import { Link } from 'react-router-dom'
 // import { useAppSelector } from '../../hooks/useAppSelector'
 
 interface ProductCardProps {
@@ -68,7 +69,16 @@ const ProductCard = (props: ProductCardProps) => {
                 <AddShoppingCart />
                 <Typography variant='body1' color='text.primary'>Add to cart</Typography>
             </IconButton>
-            <Link href={'products/' + props.product.id.toString()} underline="none" marginLeft='auto'>
+            {/* <Link href={'products/' + props.product.id.toString()} underline="none" marginLeft='auto'>
+                See more
+                <IconButton>
+                    <ReadMore fontSize='large'/>
+                </IconButton>
+            </Link> */}
+            <Link 
+                to={props.product.id.toString()}
+                style={{ marginLeft: 'auto', textDecoration: 'none'}}
+            >
                 See more
                 <IconButton>
                     <ReadMore fontSize='large'/>

@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { useLoaderData, useParams } from 'react-router-dom'
+import { Link, useLoaderData, useParams } from 'react-router-dom'
 import axios, { AxiosError } from 'axios';
-import { Alert, Card, CardContent, CardHeader, CardMedia, IconButton, ImageList, ImageListItem, Snackbar, Typography } from '@mui/material';
-import { AddShoppingCart } from '@mui/icons-material';
+import { Alert, Box, Button, Card, CardContent, CardHeader, CardMedia, IconButton, ImageList, ImageListItem, Snackbar, Typography } from '@mui/material';
+import { AddShoppingCart, ArrowBack } from '@mui/icons-material';
 
 import { Product } from '../types/Product';
 import { useAppDispatch } from '../hooks/useAppDispatch';
@@ -29,6 +29,14 @@ const ProductDetails = () => {
 
   return (
     <div>
+      <Box padding='0 20px'>
+        <Link to='/products'>
+            <Button variant='outlined'>
+                <IconButton><ArrowBack color='primary' /></IconButton>
+                Back
+            </Button>
+        </Link>
+    </Box>
       {id &&
         <Card sx={{ padding: '10px 20px'}}>
           <CardHeader
