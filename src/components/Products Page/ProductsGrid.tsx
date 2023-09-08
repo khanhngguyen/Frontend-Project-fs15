@@ -6,7 +6,6 @@ import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { fetchProductsWithConditions, sortProductsByPrice } from '../../redux/reducers/productsReducer';
 import { Condition } from '../../types/Condition';
 import ProductCard from './ProductCard';
-import { wrap } from 'module';
 
 const initialCondition: Condition = {
     price_min: 0,
